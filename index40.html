@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emoji Voting</title>
+    <style>
+        .emoji-button {
+            font-size: 2rem;
+            margin: 10px;
+        }
+        .result {
+            font-size: 2rem;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Vote for your favorite emoji!</h1>
+    <div>
+        <button class="emoji-button" onclick="vote('😀')">😀 <span id="count-😀">0</span></button>
+        <button class="emoji-button" onclick="vote('😂')">😂 <span id="count-😂">0</span></button>
+        <button class="emoji-button" onclick="vote('😍')">😍 <span id="count-😍">0</span></button>
+        <button class="emoji-button" onclick="vote('🤔')">🤔 <span id="count-🤔">0</span></button>
+    </div>
+    <button onclick="showResults()">Show Results</button>
+    <div class="result" id="result"></div>
+
+    <script>
+        const votes = {
+            '😀': 0,
+            '😂': 0,
+            '😍': 0,
+            '🤔': 0
+        };
+
+        function vote(emoji) {
+            votes[emoji]++;
+            document.getElementById('count-' + emoji).innerText = votes[emoji];
+        }
+
+        function showResults() {
+            let maxVotes = 0;
+            let winningEmoji = '';
+            for (const emoji in votes) {
+                if (votes[emoji] > maxVotes) {
+                    maxVotes = votes[emoji];
+                    winningEmoji = emoji;
+                }
+            }
+            document.getElementById('result').innerText = `The winning emoji is: ${winningEmoji} with ${maxVotes} votes!`;
+        }
+    </script>
+</body>
+</html>
